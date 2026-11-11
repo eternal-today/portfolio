@@ -495,6 +495,13 @@ h1, h2, h3, .dot-quote p, .motto blockquote p { text-wrap: balance; }
 .o-c { fill: var(--muted); font-size: 13px; font-family: var(--font-body); }
 @media (max-width: 760px) { .qa-top { grid-template-columns: minmax(0, 1fr); } .cycle { max-width: 340px; } }
 
+.motto blockquote .ch { opacity: 0; }
+.motto blockquote .ch.on { opacity: 1; }
+.motto blockquote .caret { display: inline-block; width: .55em; height: 1.05em; margin-left: 1px; vertical-align: -0.15em; background: var(--accent); animation: blink 1s steps(1) infinite; }
+.motto blockquote.typing cite { opacity: 0; transition: opacity .8s ease; }
+.motto blockquote.typed cite { opacity: 1; }
+@keyframes blink { 50% { opacity: 0; } }
+
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
@@ -573,6 +580,23 @@ toTop(); window.addEventListener('load', toTop); window.addEventListener('pagesh
       el.style.transitionDelay = (k * 90) + 'ms';
       el.classList.add('reveal'); io.observe(el);
     });
+  }
+  // typing quote
+  var bq = document.querySelector('.motto blockquote'), qp = bq && bq.querySelector('p');
+  if (qp && !reduce && 'IntersectionObserver' in window) {
+    var txt = qp.textContent; qp.setAttribute('aria-label', txt); qp.textContent = '';
+    var chs = []; for (var i = 0; i < txt.length; i++) { var sp = document.createElement('span'); sp.className = 'ch'; sp.setAttribute('aria-hidden', 'true'); sp.textContent = txt[i]; qp.appendChild(sp); chs.push(sp); }
+    var caret = document.createElement('span'); caret.className = 'caret'; caret.setAttribute('aria-hidden', 'true');
+    bq.classList.add('typing');
+    var qio = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return; qio.disconnect();
+      var k = 0;
+      (function step() {
+        if (k < chs.length) { chs[k].classList.add('on'); chs[k].after(caret); k++; setTimeout(step, chs[k - 1].textContent === ' ' ? 30 : 55 + Math.random() * 40); }
+        else { bq.classList.add('typed'); setTimeout(function () { caret.remove(); }, 2400); }
+      })();
+    }, { threshold: 0.6 });
+    qio.observe(qp);
   }
   // orbit
   var svg = document.querySelector('.orbit-svg');
