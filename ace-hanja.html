@@ -475,13 +475,59 @@ h1, h2, h3, .dot-quote p, .motto blockquote p { text-wrap: balance; }
 .totop:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .series a.s { display: grid; gap: 2px; align-content: start; }
 
+
+.qa-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); gap: 24px 48px; align-items: center; margin-bottom: 28px; }
+.qa-top .qa-intro { margin: 0; }
+.cycle { max-width: 400px; width: 100%; justify-self: center; }
+.orbit-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.o-ring { fill: none; stroke: var(--line); stroke-width: 2; }
+.o-node { fill: var(--surface); stroke: var(--accent); stroke-width: 2; transition: fill .25s ease, r .25s ease; }
+.o-nodes g.on .o-node { fill: var(--accent); }
+.o-t { fill: var(--ink); font-size: 16px; font-weight: 700; font-family: var(--font-body); }
+.o-e { fill: var(--muted); font-size: 10px; font-family: var(--font-mono); letter-spacing: .12em; }
+.o-nodes g.on .o-t { fill: var(--accent); }
+.o-dot { fill: var(--accent); }
+.o-prog { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; opacity: .55; }
+.o-c { fill: var(--muted); font-size: 13px; font-family: var(--font-body); }
+@media (max-width: 760px) { .qa-top { grid-template-columns: minmax(0, 1fr); } .cycle { max-width: 340px; } }
+
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+.contact { background: var(--accent-soft); border-top: 0; }
+.contact .wrap { padding-block: 56px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 40px; align-items: end; }
+.contact h2 { margin: 4px 0 6px; font-size: clamp(24px, 3.4vw, 32px); font-weight: 700; letter-spacing: -.02em; }
+.contact p { margin: 0; color: var(--muted); }
+.contact .mail { display: grid; gap: 8px; justify-items: start; min-width: 0; }
+.contact .addr { font-family: var(--font-mono); font-size: 15px; color: var(--ink); user-select: all; overflow-wrap: anywhere; }
+.contact .btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.contact button.more { font: inherit; font-family: var(--font-mono); font-size: 13px; background: var(--surface); cursor: pointer; }
+.contact .copied { font-size: 13px; color: var(--accent); }
+@media (max-width: 640px) { .contact .wrap { grid-template-columns: minmax(0, 1fr); } }
+.sitenav a.nl.cta-nl { color: var(--surface); background: var(--accent); font-weight: 700; }
+.sitenav a.nl.cta-nl:hover { color: var(--surface); background: var(--accent); opacity: .9; }
 </style>
 </head>
 <body>
-<nav class="sitenav" aria-label="사이트 메뉴"><div class="wrap"><a class="brand" href="index.html">Eternal <span>Today</span></a><ul><li><a class="nl" href="index.html">소개</a></li><li><a class="nl" href="projects.html" aria-current="page">프로젝트</a></li></ul></div></nav>
+<nav class="sitenav" aria-label="사이트 메뉴"><div class="wrap"><a class="brand" href="index.html">Eternal <span>Today</span></a><ul><li><a class="nl" href="index.html">소개</a></li><li><a class="nl" href="projects.html" aria-current="page">프로젝트</a></li><li><a class="nl cta-nl" href="#contact">연락하기</a></li></ul></div></nav>
 <div class="topbar"><div class="wrap"><a href="index.html">Eternal Today</a> / <a href="projects.html#ace">프로젝트</a> / <a href="ace.html">에이스 시리즈</a> / <b>한자 에이스</b></div></div>
 <header class="page-head"><div class="wrap"><h1>한자 에이스</h1><p class="lede"><span class="sx">아이가 혼자 찾아서 하는 한자 학습 앱입니다.</span><span class="sx">한국어문회 급수 기준이며, 수학 에이스와 같은 구조로 만들었습니다.</span></p><div class="facts"><div><span class="label">글자</span><b>1,000자</b></div><div><span class="label">낱말</span><b>240개</b></div><div><span class="label">급수</span><b>8급~4급</b></div></div></div></header><section><div class="wrap"><div class="sec-head"><h2>화면</h2></div><div class="shots"><figure><img src="img/hanja-home.jpg" alt="한자 에이스 첫 화면" loading="lazy"><figcaption><b>아이 홈</b><br>오늘의 한 판, 고르는 놀이터 다섯 가지, 실력 확인이 있습니다.</figcaption></figure><figure><img src="img/hanja-q.jpg" alt="한자 문제 화면" loading="lazy"><figcaption><b>문제</b><br>글자를 보고 뜻과 소리를 고릅니다. 정답 판정은 데이터로 합니다.</figcaption></figure><figure><img src="img/hanja-dogam.jpg" alt="한자 도감 화면" loading="lazy"><figcaption><b>한자 도감</b><br>처음 만난 글자는 회색, 잘 맞히면 색이 칠해지고, 오래 기억하면 금테가 됩니다.</figcaption></figure><figure><img src="img/hanja-parent.jpg" alt="한자 에이스 부모님 설정 화면" loading="lazy"><figcaption><b>부모님 설정</b><br>급수와 묶음을 고르면 그 글자가 문제에 나옵니다. 교재 진도에 맞출 수도 있어요.</figcaption></figure></div></div></section><section><div class="wrap"><div class="sec-head"><h2>글자 1,000자</h2><p>8급 50자부터 4급 250자까지 묶음 단위로 나뉘어 있고, 아직 만나지 않은 글자는 묶음 순서대로 조금씩 새로 나옵니다.</p></div><ul class="levels"><li><span class="lv">8급</span><span class="hzs"><span class="hz"><b lang="zh-Hant">一</b><small>한 일</small></span><span class="hz"><b lang="zh-Hant">二</b><small>두 이</small></span><span class="hz"><b lang="zh-Hant">三</b><small>석 삼</small></span><span class="hz"><b lang="zh-Hant">四</b><small>넉 사</small></span><span class="more-c">…</span></span><span class="cnt"><b>50자</b><i style="width:20%"></i></span></li><li><span class="lv">7급Ⅱ</span><span class="hzs"><span class="hz"><b lang="zh-Hant">自</b><small>스스로 자</small></span><span class="hz"><b lang="zh-Hant">江</b><small>강 강</small></span><span class="hz"><b lang="zh-Hant">海</b><small>바다 해</small></span><span class="hz"><b lang="zh-Hant">正</b><small>바를 정</small></span><span class="more-c">…</span></span><span class="cnt"><b>50자</b><i style="width:20%"></i></span></li><li><span class="lv">7급</span><span class="hzs"><span class="hz"><b lang="zh-Hant">天</b><small>하늘 천</small></span><span class="hz"><b lang="zh-Hant">地</b><small>땅 지</small></span><span class="hz"><b lang="zh-Hant">然</b><small>그럴 연</small></span><span class="hz"><b lang="zh-Hant">川</b><small>내 천</small></span><span class="more-c">…</span></span><span class="cnt"><b>50자</b><i style="width:20%"></i></span></li><li><span class="lv">6급Ⅱ</span><span class="hzs"><span class="hz"><b lang="zh-Hant">各</b><small>각각 각</small></span><span class="hz"><b lang="zh-Hant">角</b><small>뿔 각</small></span><span class="hz"><b lang="zh-Hant">界</b><small>지경 계</small></span><span class="hz"><b lang="zh-Hant">計</b><small>셀 계</small></span><span class="more-c">…</span></span><span class="cnt"><b>75자</b><i style="width:30%"></i></span></li><li><span class="lv">6급</span><span class="hzs"><span class="hz"><b lang="zh-Hant">感</b><small>느낄 감</small></span><span class="hz"><b lang="zh-Hant">強</b><small>강할 강</small></span><span class="hz"><b lang="zh-Hant">開</b><small>열 개</small></span><span class="hz"><b lang="zh-Hant">京</b><small>서울 경</small></span><span class="more-c">…</span></span><span class="cnt"><b>75자</b><i style="width:30%"></i></span></li><li><span class="lv">5급Ⅱ</span><span class="hzs"><span class="hz"><b lang="zh-Hant">價</b><small>값 가</small></span><span class="hz"><b lang="zh-Hant">客</b><small>손 객</small></span><span class="hz"><b lang="zh-Hant">格</b><small>격식 격</small></span><span class="hz"><b lang="zh-Hant">見</b><small>볼 견</small></span><span class="more-c">…</span></span><span class="cnt"><b>100자</b><i style="width:40%"></i></span></li><li><span class="lv">5급</span><span class="hzs"><span class="hz"><b lang="zh-Hant">加</b><small>더할 가</small></span><span class="hz"><b lang="zh-Hant">可</b><small>옳을 가</small></span><span class="hz"><b lang="zh-Hant">改</b><small>고칠 개</small></span><span class="hz"><b lang="zh-Hant">擧</b><small>들 거</small></span><span class="more-c">…</span></span><span class="cnt"><b>100자</b><i style="width:40%"></i></span></li><li><span class="lv">4급Ⅱ</span><span class="hzs"><span class="hz"><b lang="zh-Hant">假</b><small>거짓 가</small></span><span class="hz"><b lang="zh-Hant">街</b><small>거리 가</small></span><span class="hz"><b lang="zh-Hant">減</b><small>덜 감</small></span><span class="hz"><b lang="zh-Hant">監</b><small>볼 감</small></span><span class="more-c">…</span></span><span class="cnt"><b>250자</b><i style="width:100%"></i></span></li><li><span class="lv">4급</span><span class="hzs"><span class="hz"><b lang="zh-Hant">暇</b><small>틈 가</small></span><span class="hz"><b lang="zh-Hant">刻</b><small>새길 각</small></span><span class="hz"><b lang="zh-Hant">覺</b><small>깨달을 각</small></span><span class="hz"><b lang="zh-Hant">簡</b><small>대쪽 간</small></span><span class="more-c">…</span></span><span class="cnt"><b>250자</b><i style="width:100%"></i></span></li></ul><p class="cap-line">급수마다 앞 네 글자를 보여 줍니다. 급수별 배정한자 데이터는 공개 자료(rycont/hanja-grade-dataset)를 바탕으로 했고, 저작권은 한국어문회에 있습니다.</p></div></section><section><div class="wrap"><div class="sec-head"><h2>복습 상자</h2><p>글자마다 상자 칸이 있고, 칸이 오를수록 다시 나오는 간격이 길어집니다.</p></div><div class="dgwrap"><svg class="dg art" viewBox="0 0 640 262" role="img" aria-label="복습 상자 다섯 칸과 다시 나오는 간격: 매 판, 1일, 3일, 7일, 14일" style="--c:var(--p-violet);--cs:var(--p-violet-s)"><defs><marker id="mk-bx" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--c)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><text class="t-mut" x="320" y="26" font-size="13" text-anchor="middle" >힌트 없이 맞히면 한 칸 위로 (복습 차례일 때)</text><rect class="a-mute" x="30" y="84" width="70" height="34" rx="4" transform="rotate(-6 65 101)" style="stroke:var(--line);stroke-width:1"/><rect class="a-mute" x="42" y="88" width="70" height="34" rx="4" transform="rotate(4 77 105)" style="stroke:var(--line);stroke-width:1"/><rect class="a-mute" x="36" y="92" width="70" height="34" rx="4" transform="rotate(-1 71 109)" style="stroke:var(--line);stroke-width:1"/><rect class="a-card" x="20" y="112" width="104" height="62" rx="8" /><rect class="a-mute" x="60" y="120" width="24" height="5" rx="2" /><text class="t-ink" x="72" y="148" font-size="15" text-anchor="middle" >1번 칸</text><text class="t-mut" x="72" y="166" font-size="12.5" text-anchor="middle" >매 판</text><path class="a-cl" d="M104 72 Q 134 46 164 72" marker-end="url(#mk-bx)"/><rect class="a-mute" x="154" y="84" width="70" height="34" rx="4" transform="rotate(-6 189 101)" style="stroke:var(--line);stroke-width:1"/><rect class="a-mute" x="166" y="88" width="70" height="34" rx="4" transform="rotate(4 201 105)" style="stroke:var(--line);stroke-width:1"/><rect class="a-mute" x="160" y="92" width="70" height="34" rx="4" transform="rotate(-1 195 109)" style="stroke:var(--line);stroke-width:1"/><rect class="a-card" x="144" y="112" width="104" height="62" rx="8" /><rect class="a-mute" x="184" y="120" width="24" height="5" rx="2" /><text class="t-ink" x="196" y="148" font-size="15" text-anchor="middle" >2번 칸</text><text class="t-mut" x="196" y="166" font-size="12.5" text-anchor="middle" >1일 뒤</text><path class="a-cl" d="M228 72 Q 258 46 288 72" marker-end="url(#mk-bx)"/><rect class="a-cs" x="278" y="84" width="70" height="34" rx="4" transform="rotate(-6 313 101)" style="stroke:var(--line);stroke-width:1"/><rect class="a-cs" x="290" y="88" width="70" height="34" rx="4" transform="rotate(4 325 105)" style="stroke:var(--line);stroke-width:1"/><rect class="a-cs" x="284" y="92" width="70" height="34" rx="4" transform="rotate(-1 319 109)" style="stroke:var(--line);stroke-width:1"/><rect class="a-cst" x="268" y="112" width="104" height="62" rx="8" /><rect class="a-mute" x="308" y="120" width="24" height="5" rx="2" /><text class="t-ink" x="320" y="148" font-size="15" text-anchor="middle" >3번 칸</text><text class="t-c" x="320" y="166" font-size="12.5" text-anchor="middle" >3일 뒤</text><path class="a-cl" d="M352 72 Q 382 46 412 72" marker-end="url(#mk-bx)"/><rect class="a-cs" x="402" y="84" width="70" height="34" rx="4" transform="rotate(-6 437 101)" style="stroke:var(--line);stroke-width:1"/><rect class="a-cs" x="414" y="88" width="70" height="34" rx="4" transform="rotate(4 449 105)" style="stroke:var(--line);stroke-width:1"/><rect class="a-cs" x="408" y="92" width="70" height="34" rx="4" transform="rotate(-1 443 109)" style="stroke:var(--line);stroke-width:1"/><rect class="a-cst" x="392" y="112" width="104" height="62" rx="8" /><rect class="a-mute" x="432" y="120" width="24" height="5" rx="2" /><text class="t-ink" x="444" y="148" font-size="15" text-anchor="middle" >4번 칸</text><text class="t-c" x="444" y="166" font-size="12.5" text-anchor="middle" >7일 뒤</text><path class="a-cl" d="M476 72 Q 506 46 536 72" marker-end="url(#mk-bx)"/><rect x="526" y="84" width="70" height="34" rx="4" transform="rotate(-6 561 101)" style="fill:var(--surface);stroke:var(--p-gold);stroke-width:1.5"/><rect x="538" y="88" width="70" height="34" rx="4" transform="rotate(4 573 105)" style="fill:var(--surface);stroke:var(--p-gold);stroke-width:1.5"/><rect x="532" y="92" width="70" height="34" rx="4" transform="rotate(-1 567 109)" style="fill:var(--surface);stroke:var(--p-gold);stroke-width:1.5"/><rect x="516" y="112" width="104" height="62" rx="8" style="fill:var(--p-amber-s);stroke:var(--p-gold);stroke-width:2"/><rect class="a-mute" x="556" y="120" width="24" height="5" rx="2" /><text class="t-ink" x="568" y="148" font-size="15" text-anchor="middle" >5번 칸</text><text class="t-ink" x="568" y="166" font-size="12.5" text-anchor="middle" >14일 뒤</text><path d="M568 178 V204 H72 V182" style="fill:none;stroke:var(--p-coral);stroke-width:2;stroke-dasharray:5 4" marker-end="url(#mk-bx2)"/><defs><marker id="mk-bx2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" style="stroke:var(--p-coral)" stroke-width="1.8"/></marker></defs><text class="t-ink" x="320" y="226" font-size="13" text-anchor="middle" >틀리면 1번 칸으로</text><rect class="a-mute" x="132" y="240" width="12" height="12" rx="3" /><text class="t-mut" x="150" y="250" font-size="12" text-anchor="start" >1~2번 칸 · 도감 회색</text><rect class="a-cst" x="300" y="240" width="12" height="12" rx="3" /><text class="t-mut" x="318" y="250" font-size="12" text-anchor="start" >3~4번 칸 · 색</text><rect x="430" y="240" width="12" height="12" rx="3" style="fill:var(--p-amber-s);stroke:var(--p-gold);stroke-width:1.5"/><text class="t-mut" x="448" y="250" font-size="12" text-anchor="start" >5번 칸 · 금테</text></svg></div><p class="cap-line">간격은 0 · 1 · 3 · 7 · 14일. 오늘이 복습 차례인 글자는 새 글자와 섞여 나옵니다.</p></div></section><section><div class="wrap"><div class="sec-head"><h2>놀이터와 한 판</h2></div><ul class="rules"><li><b>고르는 놀이터</b><span>뜻·소리 고르기, 낱말 읽기, 듣고 고르기, 훈음 쓰기, 필순. 메뉴마다 하루 무료 횟수가 있습니다.</span></li><li><b>오늘의 한 판</b><span>새 글자와 복습 차례 글자를 섞어 열 문제로 만들어 줍니다.</span></li><li><b>실력 확인</b><span>이미 아는 글자는 도감에 바로 색칠되고, 상자 4번 칸에서 시작합니다.</span></li><li><b>보기 만들기</b><span>모양이 비슷한 글자를 보기에 섞어서, 헷갈리기 쉬운 글자를 구별하게 합니다.</span></li></ul></div></section><section><div class="wrap"><div class="sec-head"><h2>만든 방식</h2></div><div class="prose"><p>문제 만들기와 정답 판정에는 AI를 쓰지 않습니다. 키가 있을 때만 결과 끝에 격려 한마디를 AI가 붙입니다. 글자 읽기는 기기에 있는 음성 합성을 씁니다.</p></div><div class="stack" style="margin-top:24px;border-top:1px solid var(--line);padding-top:12px;font-family:var(--font-mono);font-size:12px;color:var(--muted)">React · Vite · TypeScript · Tailwind · GitHub Pages</div></div></section>
 <section><div class="wrap"><div class="pn"><a href="ace-math.html"><small>← 이전</small><b>수학 에이스</b></a><a href="ace-english.html"><small>다음 →</small><b>영어 에이스</b></a></div></div></section>
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <div>
+      <span class="label">Contact</span>
+      <h2 id="contact-h">연락하기</h2>
+      <p>궁금한 점이나 제안이 있으면 메일로 연락 주세요.</p>
+    </div>
+    <div class="mail">
+      <span class="addr" data-u="bizrimrim" data-d="gmail.com">bizrimrim [at] gmail.com</span>
+      <div class="btns"><button type="button" class="more copy">주소 복사</button><a class="more solid send" href="#contact">메일 보내기</a></div>
+      <span class="copied" role="status"></span>
+    </div>
+  </div>
+</section>
 <footer><div class="wrap"><span>© 2026 Eternal Today</span></div></footer>
 <script>
 try { history.scrollRestoration = 'manual'; } catch (e) {}
@@ -495,6 +541,65 @@ toTop(); window.addEventListener('load', toTop); window.addEventListener('pagesh
   function on() { b.hidden = (window.scrollY || document.documentElement.scrollTop) < 500; }
   window.addEventListener('scroll', on, { passive: true }); on();
   b.addEventListener('click', function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+})();
+</script>
+<script>
+(function () {
+  // contact
+  var a = document.querySelector('.contact .addr');
+  if (a) {
+    var m = a.getAttribute('data-u') + '@' + a.getAttribute('data-d');
+    a.textContent = m;
+    var send = document.querySelector('.contact .send'); if (send) send.href = 'mailto:' + m;
+    var c = document.querySelector('.contact .copy'), msg = document.querySelector('.contact .copied');
+    if (c) c.addEventListener('click', function () {
+      function done() { msg.textContent = '복사했어요'; }
+      function sel() { var r = document.createRange(); r.selectNodeContents(a); var s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = '주소를 선택했어요. 복사해 주세요.'; }
+      try { navigator.clipboard.writeText(m).then(done, sel); } catch (e) { sel(); }
+    });
+  }
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // reveal on scroll (only for things below the first screen)
+  if (!reduce && 'IntersectionObserver' in window) {
+    var sel = '.sec-head, .card, .qa li .cell, .dots li, .apps li, .shots figure, .panel, .dgwrap, .tier, .unit, .rules li, .steps4 li, .areas li, .trees figure, .contact .wrap > *';
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll(sel).forEach(function (el) {
+      if (el.getBoundingClientRect().top < innerHeight) return;
+      var p = el.parentElement, k = 0;
+      if (p) k = Array.prototype.indexOf.call(p.children, el) % 4;
+      el.style.transitionDelay = (k * 90) + 'ms';
+      el.classList.add('reveal'); io.observe(el);
+    });
+  }
+  // orbit
+  var svg = document.querySelector('.orbit-svg');
+  if (svg) {
+    var orbit = svg.querySelector('.o-orbit'), nodes = svg.querySelectorAll('.o-nodes g');
+    function setA(ang) {
+      orbit.setAttribute('transform', 'rotate(' + ang.toFixed(1) + ' 220 190)');
+      var pr = svg.querySelector('.o-prog'); var dg = Math.min(360, Math.max(0, ang + 90)); pr.setAttribute('stroke-dasharray', dg.toFixed(1) + ' 360');
+      var a0 = ((ang % 360) + 360) % 360;
+      nodes.forEach(function (g) {
+        var d = Math.abs(((+g.getAttribute('data-a') - a0) % 360 + 540) % 360 - 180);
+        g.classList.toggle('on', d < 28);
+      });
+    }
+    if (reduce) { setA(-90); }
+    else {
+      var tick = false;
+      function upd() {
+        tick = false;
+        var r = svg.getBoundingClientRect(), vh = innerHeight;
+        var c = r.top + r.height / 2;
+        var p = Math.min(1, Math.max(0, (vh * 0.95 - c) / (vh * 0.6)));
+        setA(-90 + p * 360);
+      }
+      window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
+      window.addEventListener('resize', upd); upd();
+    }
+  }
 })();
 </script>
 </body>
