@@ -591,11 +591,11 @@ toTop(); window.addEventListener('load', toTop); window.addEventListener('pagesh
     var qio = new IntersectionObserver(function (es) {
       if (!es[0].isIntersecting) return; qio.disconnect();
       var k = 0;
-      (function step() {
+      setTimeout(function step() {
         if (k < chs.length) { chs[k].classList.add('on'); chs[k].after(caret); k++; setTimeout(step, chs[k - 1].textContent === ' ' ? 30 : 55 + Math.random() * 40); }
         else { bq.classList.add('typed'); setTimeout(function () { caret.remove(); }, 2400); }
-      })();
-    }, { threshold: 0.6 });
+      }, 350);
+    }, { threshold: 1, rootMargin: '0px 0px -25% 0px' });
     qio.observe(qp);
   }
   // orbit
