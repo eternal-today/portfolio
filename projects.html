@@ -4,6 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>프로젝트 · Eternal Today</title>
+<meta name="description" content="아이와 함께, 우리 집, 나와 일, 밖으로 내놓은 것. 직접 만든 앱 14개를 소개합니다.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Eternal Today">
+<meta property="og:title" content="프로젝트 · Eternal Today">
+<meta property="og:description" content="아이와 함께, 우리 집, 나와 일, 밖으로 내놓은 것. 직접 만든 앱 14개를 소개합니다.">
+<meta property="og:url" content="https://eternal-today.github.io/portfolio/projects.html">
+<meta property="og:image" content="https://eternal-today.github.io/portfolio/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -724,7 +736,8 @@ h1, h2, h3, .dot-quote p, .motto blockquote p { text-wrap: balance; }
 (function () {
   try { history.scrollRestoration = 'manual'; } catch (e) {}
   function go() {
-    var el = location.hash === '#ace' ? document.getElementById('ace') : document.body.firstElementChild;
+    var fk = { '#kids': 1, '#family': 1, '#work': 1, '#out': 1 };
+    var el = location.hash === '#ace' ? document.getElementById('ace') : (fk[location.hash] ? document.querySelector('.filters') : document.body.firstElementChild);
     window.scrollTo(0, 0); if (el && el.scrollIntoView) el.scrollIntoView({ block: 'start' });
   }
   go(); window.addEventListener('load', go); window.addEventListener('pageshow', go);
@@ -818,6 +831,19 @@ h1, h2, h3, .dot-quote p, .motto blockquote p { text-wrap: balance; }
       window.addEventListener('resize', upd); upd();
     }
   }
+})();
+</script>
+<script>
+(function () {
+  var map = { kids: 'kid', family: 'home', work: 'me', out: 'out' }, back = { kid: 'kids', home: 'family', me: 'work', out: 'out' };
+  var k = map[location.hash.slice(1)];
+  if (k) { var b = document.querySelector('.filters button[data-filter="' + k + '"]'); if (b) b.click(); }
+  document.querySelectorAll('.filters button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-filter');
+      try { history.replaceState(null, '', f === 'all' ? location.pathname : '#' + back[f]); } catch (e) {}
+    });
+  });
 })();
 </script>
 </body>
