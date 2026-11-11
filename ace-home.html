@@ -476,6 +476,10 @@ h1, h2, h3, .dot-quote p, .motto blockquote p { text-wrap: balance; }
 .series a.s { display: grid; gap: 2px; align-content: start; }
 
 
+.pin { position: relative; height: 230vh; margin-bottom: 28px; }
+.pin-inner { position: sticky; top: 0; min-height: 100vh; display: grid; align-content: center; }
+.pin .qa-top { margin-bottom: 0; }
+@media (prefers-reduced-motion: reduce) { .pin { height: auto; } .pin-inner { position: static; min-height: 0; } }
 .qa-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); gap: 24px 48px; align-items: center; margin-bottom: 28px; }
 .qa-top .qa-intro { margin: 0; }
 .cycle { max-width: 400px; width: 100%; justify-self: center; }
@@ -496,7 +500,8 @@ h1, h2, h3, .dot-quote p, .motto blockquote p { text-wrap: balance; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
 .contact { background: var(--accent-soft); border-top: 0; }
-.contact .wrap { padding-block: 56px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 40px; align-items: end; }
+.contact .wrap { padding-block: 56px; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "head ." "desc addr" ". btns" ". msg"; gap: 6px 40px; align-items: baseline; }
+.contact .c-head { grid-area: head; } .contact .c-desc { grid-area: desc; } .contact .addr { grid-area: addr; } .contact .btns { grid-area: btns; margin-top: 6px; } .contact .copied { grid-area: msg; }
 .contact h2 { margin: 4px 0 6px; font-size: clamp(24px, 3.4vw, 32px); font-weight: 700; letter-spacing: -.02em; }
 .contact p { margin: 0; color: var(--muted); }
 .contact .mail { display: grid; gap: 8px; justify-items: start; min-width: 0; }
@@ -504,7 +509,7 @@ h1, h2, h3, .dot-quote p, .motto blockquote p { text-wrap: balance; }
 .contact .btns { display: flex; flex-wrap: wrap; gap: 8px; }
 .contact button.more { font: inherit; font-family: var(--font-mono); font-size: 13px; background: var(--surface); cursor: pointer; }
 .contact .copied { font-size: 13px; color: var(--accent); }
-@media (max-width: 640px) { .contact .wrap { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) { .contact .wrap { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "desc" "addr" "btns" "msg"; } }
 .sitenav a.nl.cta-nl { color: var(--surface); background: var(--accent); font-weight: 700; }
 .sitenav a.nl.cta-nl:hover { color: var(--surface); background: var(--accent); opacity: .9; }
 </style>
@@ -516,16 +521,11 @@ h1, h2, h3, .dot-quote p, .motto blockquote p { text-wrap: balance; }
 <section><div class="wrap"><div class="pn"><a href="ace.html"><small>← 이전</small><b>에이스 시리즈</b></a><a href="ace-math.html"><small>다음 →</small><b>수학 에이스</b></a></div></div></section>
 <section class="contact" id="contact" aria-labelledby="contact-h">
   <div class="wrap">
-    <div>
-      <span class="label">Contact</span>
-      <h2 id="contact-h">연락하기</h2>
-      <p>궁금한 점이나 제안이 있으면 메일로 연락 주세요.</p>
-    </div>
-    <div class="mail">
+    <div class="c-head"><span class="label">Contact</span><h2 id="contact-h">연락하기</h2></div>
+    <p class="c-desc">궁금한 점이나 제안이 있으면 메일로 연락 주세요.</p>
       <span class="addr" data-u="bizrimrim" data-d="gmail.com">bizrimrim [at] gmail.com</span>
       <div class="btns"><button type="button" class="more copy">주소 복사</button><a class="more solid send" href="#contact">메일 보내기</a></div>
       <span class="copied" role="status"></span>
-    </div>
   </div>
 </section>
 <footer><div class="wrap"><span>© 2026 Eternal Today</span></div></footer>
@@ -561,7 +561,7 @@ toTop(); window.addEventListener('load', toTop); window.addEventListener('pagesh
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   // reveal on scroll (only for things below the first screen)
   if (!reduce && 'IntersectionObserver' in window) {
-    var sel = '.sec-head, .card, .qa li .cell, .dots li, .apps li, .shots figure, .panel, .dgwrap, .tier, .unit, .rules li, .steps4 li, .areas li, .trees figure, .contact .wrap > *';
+    var sel = '.sec-head, .card, .qa li .cell, .dots li, .apps li, .shots figure, .panel, .dgwrap, .tier, .unit, .rules li, .steps4 li, .areas li, .trees figure, .contact .wrap';
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -8% 0px' });
@@ -591,9 +591,10 @@ toTop(); window.addEventListener('load', toTop); window.addEventListener('pagesh
       var tick = false;
       function upd() {
         tick = false;
-        var r = svg.getBoundingClientRect(), vh = innerHeight;
-        var c = r.top + r.height / 2;
-        var p = Math.min(1, Math.max(0, (vh * 0.95 - c) / (vh * 0.6)));
+        var pin = svg.closest('.pin'), vh = innerHeight, p;
+        if (pin) { var r = pin.getBoundingClientRect(); p = -r.top / Math.max(1, r.height - vh); }
+        else { var q = svg.getBoundingClientRect(); p = (vh * 0.95 - (q.top + q.height / 2)) / (vh * 0.6); }
+        p = Math.min(1, Math.max(0, p));
         setA(-90 + p * 360);
       }
       window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
